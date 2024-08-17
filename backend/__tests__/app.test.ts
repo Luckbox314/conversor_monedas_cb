@@ -6,9 +6,9 @@ describe('GET /', () => {
         process.env.PORT = '4000';
       });
 
-    it('should return Hello, World!', async () => {
-        const response = await request(app).get('/');
-        expect(response.status).toBe(200);
-        expect(response.text).toBe('Hello, World!');
+    it('Should say missin query parameters', async () => {
+        const response = await request(app).get('/api/convert');
+        expect(response.status).toBe(400);
+        expect(response.text).toBe('{"message":"Missing query parameters"}');
     });
 });
