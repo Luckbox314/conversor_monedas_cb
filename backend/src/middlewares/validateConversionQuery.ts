@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
 export function validateConversionQuery(req: Request, res: Response, next: NextFunction): void {
-  console.log(req.query);
   const { fromCurrency, fromAmount, targetCurrency, targetAmount } = req.query;
   if (!fromCurrency || !targetCurrency || !targetAmount && !fromAmount) {
     res.status(400).json({ message: 'Missing query parameters' });
