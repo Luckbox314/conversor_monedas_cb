@@ -15,7 +15,7 @@ export class ConversionService {
   async convertCurrency(fromCurrency: string, fromAmount: number, targetCurrency: string, targetAmount: number): Promise<number> {
     const rate = await this.apiService.getExchangeRate(fromCurrency, targetCurrency, new Date());
     if (fromAmount === 0 && targetAmount === 0) {
-      throw new Error('Only one of fromAmount or targetAmount must be 0');
+      throw new Error('Both fromAmount and targetAmount cannot be 0 at the same time');
     } else
     if (fromAmount === 0) {
       return targetAmount / rate / this.transactionFee;
