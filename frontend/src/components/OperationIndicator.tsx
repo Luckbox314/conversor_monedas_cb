@@ -1,4 +1,13 @@
-import { StyledCurrencyInput } from "../styles/CurrencyInput.styles";
+import {
+    StyledOperationIndicator,
+    StyledOperationButton,
+    StyledArrow,
+} from "../styles/OperationIndicator.styles";
+
+// import arrow images
+import arrow_send from '../assets/images/arrow_send.svg';
+import arrow_receive from '../assets/images/arrow_receive.svg';
+
 
 interface ClpSelectorProps {
     transactionType: string;
@@ -20,10 +29,20 @@ export const OperationIndicator: React.FC<ClpSelectorProps> = (
     }
 
     return (
-        <StyledCurrencyInput>
-            {transactionType === 'send' ? <h2>Enviar</h2> : <h2>Recibir</h2>}
-            {transactionType === 'send' ? <h3>{'-->'}</h3> : <h3>{'<--'}</h3>}
-            <button onClick={switchTransactionType}>Invertir</button>
-        </StyledCurrencyInput>
+        <StyledOperationIndicator>
+            {transactionType === 'send' ?
+            <>
+                <h1>Enviar</h1>
+                <StyledArrow src={arrow_send}/>
+            </>
+            :
+            <>
+                <h1>Recibir</h1>
+                <StyledArrow src={arrow_receive}/>
+            </>
+            }
+            
+            <StyledOperationButton send={ transactionType !== 'send' } onClick={switchTransactionType}>Cambiar</StyledOperationButton>
+        </StyledOperationIndicator>
     );
 }

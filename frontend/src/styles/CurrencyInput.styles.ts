@@ -2,8 +2,9 @@
 import styled, { css } from 'styled-components';
 
 export const StyledCurrencyInput = styled.div`
-  padding: ${({ theme }) => theme.spacing.medium};
-  background-color: ${({ theme }) => theme.colors.backgroundDark};
+  padding: ${({ theme }) => theme.spacing.large};
+  background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 10px;
 
   & > * {
     display: block;
@@ -15,8 +16,7 @@ export const CurrencyContainer = styled.div`
   width: 250px;    
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.lightText};
 `;
 
 export const CurrencyImage = styled.img`

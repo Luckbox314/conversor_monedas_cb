@@ -10,7 +10,7 @@ export const DropdownHeader = styled.div`
     font-size: 16px;
     border: 1px solid #ccc;
     cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme }) => theme.colors.backgroundDark};
     &:hover {
         background-color: ${({ theme }) => theme.colors.primaryHighlight};
     }
