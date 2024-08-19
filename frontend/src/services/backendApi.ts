@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const backendApi = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://backend:5000',
+  baseURL: process.env.REACT_APP_BACKEND_API_URL || 'http://localhost:5000',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -21,7 +21,7 @@ export const fetchMissingValue = async (
         `/api/convert`,
         {
             params: {
-                from: fromCurrency,
+                fromCurrency,
                 fromAmount,
                 targetCurrency,
                 targetAmount,

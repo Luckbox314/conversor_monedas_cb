@@ -8,6 +8,9 @@ import {
   OtherSelector,
   OperationIndicator, 
 } from '../components';
+import {
+  fetchMissingValue,
+} from '../services';
 import { Currency } from '../types';
 
 
@@ -20,12 +23,37 @@ export const CurrencyConverter = () => {
 
   const handleClpAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setClpValue(Number(event.target.value));
-    // send request to get the other ammount
+    console.log('Handle CLP amount change', event.target.value);
+    if (transactionType === 'send' && selectedCurrency) {
+      // CLP to other currency
+      fetchMissingValue('CLP', clpValue, selectedCurrency.currency || '', 0)
+      .then((response) => {
+        setOtherValue(response.convertedAmount)
+      });
+    } else if (transactionType === 'receive' && selectedCurrency) {
+      // other currency to CLP
+      fetchMissingValue(selectedCurrency.currency, 0, 'CLP', clpValue)
+      .then((response) => {
+        setOtherValue(response.convertedAmount)
+      });
+    }
   };
 
   const handleOtherAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOtherValue(Number(event.target.value));
-    // send request to get the clp ammount
+    console.log('Handle other amount change', event.target.value);
+    if (transactionType === 'send' && selectedCurrency) {
+      fetchMissingValue(selectedCurrency.currency, otherValue, 'CLP', 0)
+      .then((response) => {
+        setClpValue(response.convertedAmount)
+      });
+    } else if (transactionType === 'receive' && selectedCurrency) {
+      // CLP to other currency
+      fetchMissingValue('CLP', 0, selectedCurrency.currency, otherValue)
+      .then((response) => {
+        setClpValue(response.convertedAmount)
+      });
+    }
   };
 
   const handleOtherCurrencyChange = (currency: Currency | undefined) => {
