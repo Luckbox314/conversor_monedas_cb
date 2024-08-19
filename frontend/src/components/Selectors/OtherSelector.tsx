@@ -87,6 +87,7 @@ export const OtherSelector: React.FC<OtherSelectorProps> = (
                 <StyledAmountInput
                     type="number"
                     value={value}
+                    onFocus={(e) => e.target.select()}
                     onChange={handleAmountChange}
                 />
             </CurrencyAmountContainer>

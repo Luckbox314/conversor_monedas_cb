@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { SyledCurrencyConverterContainer } from '../styles/CurrencyConverter.styles';
+import { 
+  SyledCurrencyConverterContainer,
+  StyledSubmitButton,
+} from '../styles/CurrencyConverter.styles';
 import {
   ClpSelector,
   OtherSelector,
@@ -52,7 +55,12 @@ export const CurrencyConverter = () => {
         />
 
         {/* Send Button */}
-        <div>Send</div>
+        <StyledSubmitButton
+          send={transactionType === 'send'}
+          href='https://www.currencybird.cl/'
+        >
+          {transactionType === 'send' ? <h2>Enviar</h2> : <h2>Recibir</h2>}
+        </StyledSubmitButton>
         
     </SyledCurrencyConverterContainer>
   );

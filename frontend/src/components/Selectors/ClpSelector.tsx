@@ -26,7 +26,12 @@ export const ClpSelector: React.FC<ClpSelectorProps> = ({value, handleChange}) =
 
             <CurrencyAmountContainer>
                 <StyledAmountLabel>Cantidad:</StyledAmountLabel>
-                <StyledAmountInput type="number" onChange={handleChange}  value={value}/>
+                <StyledAmountInput
+                    type="number"
+                    onChange={handleChange}
+                    onFocus={(e) => e.target.select()}
+                    value={value}
+                />
             </CurrencyAmountContainer>
         </StyledCurrencyInput>
     );
