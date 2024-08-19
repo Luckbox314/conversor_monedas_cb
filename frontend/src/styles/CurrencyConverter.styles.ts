@@ -22,21 +22,24 @@ export const StyledSubmitButton = styled.a<{send: boolean}>`
 
 
   ${({ send }) =>
-    send &&
-    css`
-      background-color: ${({ theme }) => theme.colors.primaryHighlight};
-      &:hover {
-        background-color: ${({ theme }) => theme.colors.primaryHighlightLight};
-      }
-    `
-    ||
-    !send &&
-    css`
-      background-color: ${({ theme }) => theme.colors.secondaryHighlight};
-      &:hover {
-        background-color: ${({ theme }) => theme.colors.secondaryHighlightLight};
-      }
-    `
+    (
+      send &&
+      css`
+        background-color: ${({ theme }) => theme.colors.primaryHighlight};
+        &:hover {
+          background-color: ${({ theme }) => theme.colors.primaryHighlightLight};
+        }
+      `
+    ) ||
+    (
+      !send &&
+      css`
+        background-color: ${({ theme }) => theme.colors.secondaryHighlight};
+        &:hover {
+          background-color: ${({ theme }) => theme.colors.secondaryHighlightLight};
+        }
+      `
+    )
   }
 `;
 

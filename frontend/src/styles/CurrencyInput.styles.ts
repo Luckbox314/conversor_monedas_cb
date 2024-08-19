@@ -1,5 +1,5 @@
 // src/components/Button/Button.styles.ts
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const StyledCurrencyInput = styled.div`
   padding: ${({ theme }) => theme.spacing.large};

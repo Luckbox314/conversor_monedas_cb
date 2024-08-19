@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
     StyledCurrencyInput,
     CurrencyAmountContainer,
@@ -11,7 +11,7 @@ import {
     useFetchCurrencyBirdSend
 } from "../../hooks";
 import { Currency } from "../../types";
-import { getImageUrl, sortCurrencies } from '../../utils';
+import { sortCurrencies } from '../../utils';
 
 interface OtherSelectorProps {
     value: number;
@@ -20,8 +20,6 @@ interface OtherSelectorProps {
     handleAmountChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
     handleCurrencyChange: (currency: Currency | undefined) => void;
 }
-
-const FLAG_API_URL = 'https://flagsapi.com/BE/flat/64.png';
 
 export const OtherSelector: React.FC<OtherSelectorProps> = (
     {
@@ -34,14 +32,10 @@ export const OtherSelector: React.FC<OtherSelectorProps> = (
 ) => {
     const {
         data: incomingCurrencies,
-        loading: incomingLoading,
-        error: incomingError
     } = useFetchCurrencyBirdIncoming();
 
     const {
         data: sendCurrencies,
-        loading: sendLoading,
-        error: sendError
     } = useFetchCurrencyBirdSend();
 
     useEffect(() => {

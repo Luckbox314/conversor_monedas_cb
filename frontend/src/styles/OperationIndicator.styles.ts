@@ -20,19 +20,18 @@ export const StyledOperationButton = styled.button<{ send: boolean }>`
   background-color: ${({ theme }) => theme.colors.secondary};
 
   ${({ send }) =>
-    send &&
-    css`
-      &:hover {
+    (
+      send &&
+      css`
         background-color: ${({ theme }) => theme.colors.primaryHighlight};
-      } 
-    `
-    ||
-    !send &&
-    css`
-      &:hover {
+      `
+    ) ||
+    (
+      !send &&
+      css`
         background-color: ${({ theme }) => theme.colors.secondaryHighlight};
-      }
-    `
+      `
+    )
   }
 `;
 
