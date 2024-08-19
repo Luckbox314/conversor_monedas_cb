@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
   SyledCurrencyConverterContainer,
   StyledSubmitButton,
@@ -55,6 +55,20 @@ export const CurrencyConverter = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (transactionType === 'send' && selectedCurrency) {
+      fetchMissingValue('CLP', clpValue, selectedCurrency.currency || '', 0)
+      .then((response) => {
+        setOtherValue(response.convertedAmount)
+      });
+    } else if (transactionType === 'receive' && selectedCurrency) {
+      fetchMissingValue(selectedCurrency.currency, 0, 'CLP', clpValue)
+      .then((response) => {
+        setOtherValue(response.convertedAmount)
+      });
+    }
+  }, [transactionType, selectedCurrency]);
 
   const handleOtherCurrencyChange = (currency: Currency | undefined) => {
     setselectedCurrency(currency);
