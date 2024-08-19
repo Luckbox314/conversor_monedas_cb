@@ -19,17 +19,23 @@ export const StyledSubmitButton = styled.a<{send: boolean}>`
   align-items: center;
   cursor: pointer;
   border-radius: 4px;
-  
+
 
   ${({ send }) =>
     send &&
     css`
       background-color: ${({ theme }) => theme.colors.primaryHighlight};
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.primaryHighlightLight};
+      }
     `
     ||
     !send &&
     css`
       background-color: ${({ theme }) => theme.colors.secondaryHighlight};
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.secondaryHighlightLight};
+      }
     `
   }
 `;
