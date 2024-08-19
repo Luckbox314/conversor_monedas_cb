@@ -1,7 +1,5 @@
 import { ApiService } from './apiService';
 
-const TRANSACTION_FEE = 0.95;
-
 export class ConversionService {
   private apiService: ApiService;
   public transactionFee: number;
@@ -9,7 +7,7 @@ export class ConversionService {
 
   constructor(apiService?: ApiService) {
     this.apiService = apiService || new ApiService();
-    this.transactionFee = TRANSACTION_FEE;
+    this.transactionFee = Number(process.env.TRANSACTION_FEE) || 0.95;
   }
 
   async convertCurrency(fromCurrency: string, fromAmount: number, targetCurrency: string, targetAmount: number): Promise<number> {
