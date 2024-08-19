@@ -1,19 +1,30 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const DropdownContainer = styled.div`
     position: relative;
     width: 250px;
 `;
 
-export const DropdownHeader = styled.div`
+export const DropdownHeader = styled.div<{send: boolean}>`
     padding: 8px;
     font-size: 16px;
-    border: 1px solid #ccc;
     cursor: pointer;
     background-color: ${({ theme }) => theme.colors.backgroundDark};
-    &:hover {
-        background-color: ${({ theme }) => theme.colors.primaryHighlight};
-    }
+
+  ${({ theme, send }) =>
+    ( send && css`
+        &:hover {
+          background-color: ${theme.colors.primaryHighlight};
+        }
+      `
+    ) ||
+    ( !send && css`
+        &:hover {
+          background-color: ${theme.colors.secondaryHighlight};
+        }
+      `
+    )
+  }
 `;
 
 export const DropdownListContainer = styled.div`
@@ -32,15 +43,27 @@ export const DropdownList = styled.ul`
     list-style-type: none;
 `;
 
-export const ListItem = styled.li`
+export const ListItem = styled.li<{send: boolean}>`
     display: flex;
     align-items: center;
     padding: 8px;
     cursor: pointer;
 
-    &:hover {
-        background-color: ${({ theme }) => theme.colors.primaryHighlight};
-    }
+  ${({ theme, send }) =>
+    ( send && css`
+        &:hover {
+          background-color: ${theme.colors.primaryHighlight};
+        }
+      `
+    ) ||
+    ( !send && css`
+        &:hover {
+          background-color: ${theme.colors.secondaryHighlight};
+        }
+      `
+    )
+  }
+
 `;
 
 export const OptionImage = styled.img`

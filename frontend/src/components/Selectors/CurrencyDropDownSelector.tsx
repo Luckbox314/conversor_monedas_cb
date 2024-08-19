@@ -15,6 +15,7 @@ import { getImageUrl, sortCurrencies } from '../../utils';
 interface CurrencyDropDownSelectorProps {
     selectedCurrency: Currency | undefined;
     currencies: Currency[];
+    send: boolean;
     handleChange: (currency: Currency) => void;
 }
 
@@ -25,6 +26,7 @@ export const CurrencyDropDownSelector: React.FC<CurrencyDropDownSelectorProps> =
     {
         selectedCurrency,
         currencies,
+        send,
         handleChange
     }
 ) => {
@@ -39,7 +41,7 @@ export const CurrencyDropDownSelector: React.FC<CurrencyDropDownSelectorProps> =
 
     return (
         <DropdownContainer>
-            <DropdownHeader onClick={toggleDropdown}>
+            <DropdownHeader onClick={toggleDropdown} send={send}>
                 {selectedCurrency ? (
                     <>
                         <OptionImage
@@ -56,7 +58,7 @@ export const CurrencyDropDownSelector: React.FC<CurrencyDropDownSelectorProps> =
                 <DropdownListContainer>
                     <DropdownList>
                         {currencies.sort(sortCurrencies).map((curr) => (
-                            <ListItem key={curr.id} onClick={() => onOptionClicked(curr)}>
+                            <ListItem key={curr.id} onClick={() => onOptionClicked(curr)} send={send} >
                                 <OptionImage
                                     src={getImageUrl(curr.isoCode)}
                                     alt={'*'}

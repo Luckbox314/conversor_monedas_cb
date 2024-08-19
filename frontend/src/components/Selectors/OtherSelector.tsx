@@ -67,12 +67,14 @@ export const OtherSelector: React.FC<OtherSelectorProps> = (
                     selectedCurrency={selectedCurrency}
                     currencies={sendCurrencies}
                     handleChange={handleCurrencyChange}
+                    send={true}
                 /> :
                 incomingCurrencies &&
                 <CurrencyDropDownSelector 
                     selectedCurrency={selectedCurrency}
                     currencies={incomingCurrencies}
                     handleChange={handleCurrencyChange}
+                    send={false}
                 />
             }
 
