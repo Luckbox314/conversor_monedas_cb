@@ -27,14 +27,14 @@ export const CurrencyConverter = () => {
     if (transactionType === 'send' && selectedCurrency) {
       // CLP to other currency
       fetchMissingValue('CLP', newClpValue, selectedCurrency.currency || '', 0)
-      .then((response) => {
-        setOtherValue(response.convertedAmount)
+      .then((value) => {
+        setOtherValue(value)
       });
     } else if (transactionType === 'receive' && selectedCurrency) {
       // other currency to CLP
       fetchMissingValue(selectedCurrency.currency, 0, 'CLP', newClpValue)
-      .then((response) => {
-        setOtherValue(response.convertedAmount)
+      .then((value) => {
+        setOtherValue(value)
       });
     }
   };
@@ -44,14 +44,14 @@ export const CurrencyConverter = () => {
     setOtherValue(newOtherValue);
     if (transactionType === 'send' && selectedCurrency) {
       fetchMissingValue(selectedCurrency.currency, newOtherValue, 'CLP', 0)
-      .then((response) => {
-        setClpValue(response.convertedAmount)
+      .then((value) => {
+        setClpValue(value)
       });
     } else if (transactionType === 'receive' && selectedCurrency) {
       // CLP to other currency
       fetchMissingValue('CLP', 0, selectedCurrency.currency, newOtherValue)
-      .then((response) => {
-        setClpValue(response.convertedAmount)
+      .then((value) => {
+        setClpValue(value)
       });
     }
   };
@@ -59,13 +59,13 @@ export const CurrencyConverter = () => {
   useEffect(() => {
     if (transactionType === 'send' && selectedCurrency) {
       fetchMissingValue('CLP', clpValue, selectedCurrency.currency || '', 0)
-      .then((response) => {
-        setOtherValue(response.convertedAmount)
+      .then((value) => {
+        setOtherValue(value)
       });
     } else if (transactionType === 'receive' && selectedCurrency) {
       fetchMissingValue(selectedCurrency.currency, 0, 'CLP', clpValue)
       .then((response) => {
-        setOtherValue(response.convertedAmount)
+        setOtherValue(response)
       });
     }
   }, [transactionType, selectedCurrency]);
