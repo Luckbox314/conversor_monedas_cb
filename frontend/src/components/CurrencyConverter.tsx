@@ -22,17 +22,17 @@ export const CurrencyConverter = () => {
   const [transactionType, setTransactionType] = useState('send');
 
   const handleClpAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setClpValue(Number(event.target.value));
-    console.log('Handle CLP amount change', event.target.value);
+    const newClpValue = Number(event.target.value);
+    setClpValue(newClpValue);
     if (transactionType === 'send' && selectedCurrency) {
       // CLP to other currency
-      fetchMissingValue('CLP', clpValue, selectedCurrency.currency || '', 0)
+      fetchMissingValue('CLP', newClpValue, selectedCurrency.currency || '', 0)
       .then((response) => {
         setOtherValue(response.convertedAmount)
       });
     } else if (transactionType === 'receive' && selectedCurrency) {
       // other currency to CLP
-      fetchMissingValue(selectedCurrency.currency, 0, 'CLP', clpValue)
+      fetchMissingValue(selectedCurrency.currency, 0, 'CLP', newClpValue)
       .then((response) => {
         setOtherValue(response.convertedAmount)
       });
@@ -40,16 +40,16 @@ export const CurrencyConverter = () => {
   };
 
   const handleOtherAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOtherValue(Number(event.target.value));
-    console.log('Handle other amount change', event.target.value);
+    const newOtherValue = Number(event.target.value);
+    setOtherValue(newOtherValue);
     if (transactionType === 'send' && selectedCurrency) {
-      fetchMissingValue(selectedCurrency.currency, otherValue, 'CLP', 0)
+      fetchMissingValue(selectedCurrency.currency, newOtherValue, 'CLP', 0)
       .then((response) => {
         setClpValue(response.convertedAmount)
       });
     } else if (transactionType === 'receive' && selectedCurrency) {
       // CLP to other currency
-      fetchMissingValue('CLP', 0, selectedCurrency.currency, otherValue)
+      fetchMissingValue('CLP', 0, selectedCurrency.currency, newOtherValue)
       .then((response) => {
         setClpValue(response.convertedAmount)
       });
