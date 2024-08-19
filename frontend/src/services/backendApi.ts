@@ -16,7 +16,10 @@ export const fetchMissingValue = async (
     fromAmount: number,
     targetCurrency: string,
     targetAmount: number
-): Promise<any> => {
+): Promise<BackendResponse> => {
+    if (fromAmount == 0 && targetAmount == 0) {
+        return { convertedAmount: 0 };
+    }
     const response = await backendApi.get<BackendResponse>(
         `/api/convert`,
         {
