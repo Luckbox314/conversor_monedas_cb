@@ -1,9 +1,8 @@
 // src/components/Button/Button.styles.ts
 import styled, { css } from 'styled-components';
 
-export const SyledCurrencyConverterContainer = styled.div`
+export const StyledOperationIndicator = styled.div`
   padding: ${({ theme }) => theme.spacing.medium};
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  background-color: ${({ theme }) => theme.colors.backgroundDark};
+  }
 `;

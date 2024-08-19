@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Currency } from '../types';
 
 const currencyBirdApi = axios.create({
   baseURL: process.env.REACT_APP_CURRENCYBIRD_API || 'https://elb.currencybird.cl/apigateway-cb/api/public',
@@ -8,7 +9,7 @@ const currencyBirdApi = axios.create({
 });
 
 export const fetchCurrencyBirdSendCountries = async (): Promise<any> => {
-    const response = await currencyBirdApi.get(`/sendCountries`);
+    const response = await currencyBirdApi.get<Currency[]>(`/sendCountries`);
     if (response.status !== 200) {
         throw new Error('Failed to fetch data');
     }
@@ -16,7 +17,7 @@ export const fetchCurrencyBirdSendCountries = async (): Promise<any> => {
 };
 
 export const fetchCurrencyBirdIncomingCountries = async (): Promise<any> => {
-  const response = await currencyBirdApi.get(`/incomingCountries`);
+  const response = await currencyBirdApi.get<Currency[]>(`/incomingCountries`);
   if (response.status !== 200) {
       throw new Error('Failed to fetch data');
   }
