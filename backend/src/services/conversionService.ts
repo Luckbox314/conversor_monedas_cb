@@ -31,17 +31,9 @@ export class ConversionService {
     }
 
     if (fromCurrency === "clp") {
-      if (fromAmount === 0) {
-        conversionResponse.exchangeRate = 1 / finalExchangeRate;
-      } else {
-        conversionResponse.exchangeRate = 1 / finalExchangeRate;
-      }
+      conversionResponse.exchangeRate = 1 / finalExchangeRate;
     } else {
-      if (fromAmount === 0) {
-        conversionResponse.exchangeRate = finalExchangeRate;
-      } else {
-        conversionResponse.exchangeRate = finalExchangeRate
-      }
+      conversionResponse.exchangeRate = finalExchangeRate;
     }
     return conversionResponse;
   }
