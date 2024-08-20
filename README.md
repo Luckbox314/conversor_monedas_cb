@@ -87,14 +87,14 @@ If you only need to run one part of the project (frontend or backend):
 ### Environment Variables
 * Frontend: Environment variables can be set in a .env file in the root directory of the frontend project. For example:
     ```shell
-        REACT_APP_BACKEND_API_URL=http://localhost:5000
-        REACT_APP_CURRENCY_BIRD_API_URL=https://elb.currencybird.cl/apigateway-cb/api/public
-        WATCHPACK_POLLING=true # for windows development using Docker
+    REACT_APP_BACKEND_API_URL=http://localhost:5000
+    REACT_APP_CURRENCY_BIRD_API_URL=https://elb.currencybird.cl/apigateway-cb/api/public
+    WATCHPACK_POLLING=true # for windows development using Docker
     ```
 * Backend: Environment variables for the backend can also be configured in a similar way.
     ```shell
-        PORT=5000
-        API_URL=https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api
-        API_VERSION=v1
-        TRANSACTION_FEE=0.95
+    PORT=5000
+    API_URL=https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api
+    API_VERSION=v1
+    TRANSACTION_FEE=0.95
     ```
