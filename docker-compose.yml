@@ -27,3 +27,11 @@ services:
       - REACT_APP_CURRENCY_BIRD_API_URL=https://elb.currencybird.cl/apigateway-cb/api/public
       - WATCHPACK_POLLING=true
     command: npm start
+
+  backend-tests:
+    build:
+      context: ./backend
+      target: development
+    volumes:
+      - ./backend:/app
+    command: npm test
