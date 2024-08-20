@@ -37,11 +37,11 @@ cd conversor_monedas_cb
 ### 2. Build and Run the Containers
 Use Docker Compose to build and start the containers for both the frontend and backend:    
 ```bash
-docker-compose up --build
+docker-compose up --build frontend backend
 ```
 This command will:
 
-* Build the Docker images for the frontend and backend.
+* Build the Docker images for the frontend and backend using default enviroment variables.
 * Start the containers.
 * Attach the logs to your terminal.
 
@@ -49,7 +49,7 @@ This command will:
 Once the containers are up and running, you can access the application in your browser:
 
 * Frontend: http://localhost:3000
-* Backend: The backend runs at http://localhost:5000 but doesn't have any UI.
+* Backend: The backend runs at http://localhost:5000 but doesn't have any GUI.
 
 ### 4. Stopping the Application
 To stop the running containers, press Ctrl + C in the terminal where docker-compose up is running, or run:
@@ -58,6 +58,14 @@ To stop the running containers, press Ctrl + C in the terminal where docker-comp
 docker-compose down
 ```
 This command will stop and remove the containers, networks, and any associated volumes.
+
+## Backend Testing
+
+To run the backend tests use the command:
+
+```bash
+docker-compose run --rm backend-tests
+```
 
 ## Development
 If you need to develop or debug the application:
@@ -78,7 +86,15 @@ If you only need to run one part of the project (frontend or backend):
 
 ### Environment Variables
 * Frontend: Environment variables can be set in a .env file in the root directory of the frontend project. For example:
-    ```bash
-    REACT_APP_API_URL=http://localhost:5000
+    ```shell
+        REACT_APP_BACKEND_API_URL=http://localhost:5000
+        REACT_APP_CURRENCY_BIRD_API_URL=https://elb.currencybird.cl/apigateway-cb/api/public
+        WATCHPACK_POLLING=true # for windows development using Docker
     ```
 * Backend: Environment variables for the backend can also be configured in a similar way.
+    ```shell
+        PORT=5000
+        API_URL=https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api
+        API_VERSION=v1
+        TRANSACTION_FEE=0.95
+    ```
