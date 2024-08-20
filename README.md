@@ -2,6 +2,11 @@
 
 This is a simple currency converter application built with a React frontend and an Express backend. The project is fully containerized using Docker and Docker Compose.
 
+## Demo video (Spanish)
+[![Youtube Video Demo](https://img.youtube.com/vi/JuAg3BN58eM/0.jpg)](https://www.youtube.com/watch?v=JuAg3BN58eM)
+
+Youtube link: https://www.youtube.com/watch?v=JuAg3BN58eM
+
 ## Prerequisites
 
 Before you start, ensure you have the following installed on your machine:
