@@ -20,21 +20,24 @@ export const CurrencyConverter = () => {
   const [otherValue, setOtherValue] = useState(0);
   const [selectedCurrency, setselectedCurrency] = useState<Currency | undefined>(undefined);
   const [transactionType, setTransactionType] = useState('send');
+  const [exchangeRate, setExchangeRate] = useState(0);
 
   const handleClpAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newClpValue = Number(event.target.value);
     setClpValue(newClpValue);
     if (transactionType === 'send' && selectedCurrency) {
       // CLP to other currency
-      fetchMissingValue('CLP', newClpValue, selectedCurrency.currency || '', 0)
-      .then((value) => {
-        setOtherValue(value)
+      fetchMissingValue('CLP', newClpValue, selectedCurrency.currency, 0)
+      .then((response) => {
+        setOtherValue(response.value)
+        setExchangeRate(response.exchangeRate)
       });
     } else if (transactionType === 'receive' && selectedCurrency) {
       // other currency to CLP
       fetchMissingValue(selectedCurrency.currency, 0, 'CLP', newClpValue)
-      .then((value) => {
-        setOtherValue(value)
+      .then((response) => {
+        setOtherValue(response.value)
+        setExchangeRate(response.exchangeRate)
       });
     }
   };
@@ -43,29 +46,33 @@ export const CurrencyConverter = () => {
     const newOtherValue = Number(event.target.value);
     setOtherValue(newOtherValue);
     if (transactionType === 'send' && selectedCurrency) {
-      fetchMissingValue(selectedCurrency.currency, newOtherValue, 'CLP', 0)
-      .then((value) => {
-        setClpValue(value)
+      fetchMissingValue('CLP', 0, selectedCurrency.currency, newOtherValue)
+      .then((response) => {
+        setClpValue(response.value)
+        setExchangeRate(response.exchangeRate)
       });
     } else if (transactionType === 'receive' && selectedCurrency) {
       // CLP to other currency
-      fetchMissingValue('CLP', 0, selectedCurrency.currency, newOtherValue)
-      .then((value) => {
-        setClpValue(value)
+      fetchMissingValue(selectedCurrency.currency, newOtherValue, 'CLP', 0)
+      .then((response) => {
+        setClpValue(response.value)
+        setExchangeRate(response.exchangeRate)
       });
     }
   };
 
   useEffect(() => {
     if (transactionType === 'send' && selectedCurrency) {
-      fetchMissingValue('CLP', clpValue, selectedCurrency.currency || '', 0)
-      .then((value) => {
-        setOtherValue(value)
+      fetchMissingValue('CLP', clpValue, selectedCurrency.currency, 0)
+      .then((response) => {
+        setOtherValue(response.value)
+        setExchangeRate(response.exchangeRate)
       });
     } else if (transactionType === 'receive' && selectedCurrency) {
       fetchMissingValue(selectedCurrency.currency, 0, 'CLP', clpValue)
       .then((response) => {
-        setOtherValue(response)
+        setOtherValue(response.value)
+        setExchangeRate(response.exchangeRate)
       });
     }
   }, [transactionType, selectedCurrency]);
@@ -85,7 +92,9 @@ export const CurrencyConverter = () => {
 
         <OperationIndicator
           transactionType={transactionType}
+          otherCurrency={selectedCurrency?.currency || ''}
           setTransactionType={setTransactionType}
+          exchangeRate={exchangeRate}
         />
 
         <OtherSelector

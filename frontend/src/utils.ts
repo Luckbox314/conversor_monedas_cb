@@ -20,7 +20,13 @@ export const getImageUrl = (isoCode: string) => {
 }
 
 export const trimInsignificantDecimals = (amount: number) => {
+
+
     let strValue = amount.toString();
+    if (strValue.includes("e")) {
+        // Convert the number to a string without scientific notation
+        strValue = amount.toFixed(20).replace(/\.?0+$/, "");
+    }
 
     // Check if the amount is less than 1
     if (Math.abs(amount) < 1) {
@@ -35,14 +41,14 @@ export const trimInsignificantDecimals = (amount: number) => {
 
         // Find the first two non-zero digits after the decimal
         let significantDecimals = "";
-        let count = 0;
+        let significantCount = 0;
         for (let i = 0; i < decimalPart.length; i++) {
+            significantDecimals += decimalPart[i];
             if (decimalPart[i] !== "0") {
-                significantDecimals += decimalPart[i];
-                count++;
-                if (count === 2) break;
-            } else if (count > 0) {
-                significantDecimals += decimalPart[i];
+                significantCount++;
+                if (significantCount === 2) {
+                    break;
+                }
             }
         }
 

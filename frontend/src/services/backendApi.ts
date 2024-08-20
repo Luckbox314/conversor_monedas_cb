@@ -10,7 +10,8 @@ const backendApi = axios.create({
 });
 
 interface BackendResponse {
-    convertedAmount: number;
+    value: number;
+    exchangeRate: number;
 };
 
 export const fetchMissingValue = async (
@@ -18,9 +19,9 @@ export const fetchMissingValue = async (
     fromAmount: number,
     targetCurrency: string,
     targetAmount: number
-): Promise<number> => {
+): Promise<BackendResponse> => {
     if (fromAmount == 0 && targetAmount == 0) {
-        return 0;
+        return { value: 0, exchangeRate: 0 };
     }
     const response = await backendApi.get<BackendResponse>(
         `/api/convert`,
@@ -36,5 +37,9 @@ export const fetchMissingValue = async (
     if (response.status !== 200) {
         throw new Error('Failed to fetch data');
     }
-    return trimInsignificantDecimals(response.data.convertedAmount);
+
+
+    return {
+        value: trimInsignificantDecimals(response.data.value),
+        exchangeRate: trimInsignificantDecimals(response.data.exchangeRate) };
 };

@@ -11,12 +11,16 @@ import arrow_receive from '../assets/images/arrow_receive.svg';
 
 interface ClpSelectorProps {
     transactionType: string;
+    otherCurrency: string;
+    exchangeRate: number;
     setTransactionType: (value: string) => void;
 }
 
 export const OperationIndicator: React.FC<ClpSelectorProps> = (
     {
         transactionType,
+        otherCurrency,
+        exchangeRate,
         setTransactionType
     }
 ) => {
@@ -41,8 +45,15 @@ export const OperationIndicator: React.FC<ClpSelectorProps> = (
                 <StyledArrow src={arrow_receive}/>
             </>
             }
-            
             <StyledOperationButton send={ transactionType !== 'send' } onClick={switchTransactionType}>Cambiar</StyledOperationButton>
+            {
+                exchangeRate !== 0 && otherCurrency !== undefined &&
+                <>
+                    <p>Taza de cambio:</p>
+                    <p>{exchangeRate} CLP = 1 {otherCurrency}</p>
+                </>
+            }
+            
         </StyledOperationIndicator>
     );
 }
